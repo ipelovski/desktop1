@@ -11,6 +11,7 @@ import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URI;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Random;
@@ -81,5 +82,15 @@ public class Controller {
             mediaPlayer.setOnStopped(() -> playingText.setText(""));
             mediaView.setMediaPlayer(mediaPlayer);
         }
+    }
+
+    public void play(URI soundFile) {
+        Media media = new Media(soundFile.toString());
+        playingText.setText(media.getSource());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(1.0);
+        mediaPlayer.play();
+        mediaPlayer.setOnStopped(() -> playingText.setText(""));
+        mediaView.setMediaPlayer(mediaPlayer);
     }
 }
